@@ -1,11 +1,15 @@
+require('dotenv').config()
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Millennium Park`,
+    description: `Visit Chicago's Millenium Park and experience one of the recreational lifebloods of downtown.`,
+    author: `Chicago Park District`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -13,8 +17,35 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `millennium-park`,
+        accessToken: `${process.env.API_KEY}`,
+        linkResolver: ({node, key, value}) => article => `/${article.uid}`,
+      }
+    },
+    // {
+    //   resolve: `gatsby-source-mongodb`,
+    //   options: { 
+    //     server: { address: `cluster0-shard-00-01-ytisr.mongodb.net`, port: `27017`},
+    //     dbName: `millenium-park`, 
+    //     collection: `sections`,
+    //     auth: { user: `steveskiff`, password: `${process.env.MONGODB_ADMIN_PW}` },
+    //     extraParams: { replicaSet: `Cluster0-shard-0`, ssl: true, authSource: `admin`}
+    //    },
+    // },
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
+    // {
+    //   resolve: `gatsby-source-strapi`,
+    //   options: {
+    //     apiURL:`http://localhost:1337`,
+    //     contentTypes:[`article`, `section`],
+    //     queryLimit: 1000,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
