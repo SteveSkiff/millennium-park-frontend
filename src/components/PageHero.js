@@ -4,24 +4,55 @@ import Media from './Breakpoints'
 
 const PageHeroContainer = styled.section`
     margin: 0;
-`
-
-const PageHeroTitle = styled.h1`
-    font-size: 32px;
-    margin: 50px 10px;
-    margin-bottom: 0;
+    &:before {
+        position: absolute;
+        content:"";
+        top:0;
+        left:0;
+        height: 250px;
+        width: 100vw;
+        background-color: black;
+        opacity: 0.5;
+    }
     ${Media.phone`
-        margin: 50px 5%;
-        margin-bottom: 0;
+    
     `}
 `
 
-const PageHeroImage = styled.img`
+const PageHeroTitle = styled.h1`
+    font-size: 36px;
+    margin: 0px;
+    padding: 0px 5%;
+    margin-top: -6px;
+    margin-bottom: 0;
+    
+    background-color: ${({category}) => 
+        category === 'plan' && '#47bfa4' ||
+        category === 'learn' && '#ffc20f' || 
+        category === 'partner' && '#f27bb1'
+    };
+    width: 100%;
+    ${Media.phone`
+        font-size: 36px;
+        padding: 0px 5%;
+        margin-bottom: 0;
+    `}
 
+`
+
+const PageHeroImage = styled.img`
+    margin: 0;
+    padding: 0;
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    ${Media.phone`
+        object-fit: cover;
+    `}
 `
 
 export {
     PageHeroContainer,
     PageHeroTitle,
     PageHeroImage,
-}
+} 

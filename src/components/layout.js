@@ -26,7 +26,7 @@ const Layout = ({ children }) => (
         allPrismicArticle {
           edges {
             node {
-              slugs
+              uid
               data {
                 category {
                   uid
@@ -42,7 +42,7 @@ const Layout = ({ children }) => (
         allPrismicContentList {
           edges {
             node {
-              slugs
+              uid
               data {
                 category {
                   uid

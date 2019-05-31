@@ -3,9 +3,9 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import Media from '../components/Breakpoints'
 import { graphql } from 'gatsby'
+import Img from "gatsby-image"
 
-import mpbean from '../images/mphero.jpg'
-import fbicon from "../images/icon_fb.svg"
+import mapicon from "../images/icon_map.png"
 import mpmap from '../images/mpmap.jpg'
 
 
@@ -22,16 +22,19 @@ import {
   SectionSubTextContainer,
   SubTextContainer,
   SubImage,
-  SocialIcon,
+  Icon,
   SubTextTitle,
   SubText,
   ExternalLink,
+  SectionSubContainer
 } from '../components/IndexSection'
 
 const IndexContainer = styled.section`
   display: flex;
   flex-direction: row;
   padding: 0;
+  margin: 5%;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3);
   ${Media.tablet`
     flex-direction: column;
   `}
@@ -39,11 +42,22 @@ const IndexContainer = styled.section`
 
 const HeroContainer = styled.div`
   position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  ${Media.phone`
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+  `}
 `
 
 const IndexTitle = styled.h1`
   position: absolute;
-  font-size: 55px;
+  font-size: 65px;
   font-weight: bold;
   bottom: 1%;
   left: 0;
@@ -52,38 +66,48 @@ const IndexTitle = styled.h1`
   z-index: 3;
   color: white;
   text-shadow: 1px 1px 0px rgba(0,0,0,0.4);
+
+  ${Media.phone`
+    font-size: 55px;
+  `}
 `
 
-const IndexHero = styled.section`
-  text-align: center;
-  background-color: blue;
-  height: 100vh;
-  width: 100%;
-  background-image: url("${mpbean}");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 45% 30%;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-column-end: span 2;
-  ${Media.tablet`
+const IndexHeroImg = styled(Img)`
+  width: 105%;
+  margin-top: -25%;
+  margin-left: -5%;
+  ${Media.phone`
+    width: 100%;
+    display: block;
+    margin: 0;
   `}
 `
 
 const IntroductionContainer = styled.section`
-  padding: 100px 5%;
-  margin: 0;
+  padding: 80px 5%;
+  margin: 40px 0px;
   background: ${props => props.color};
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3);
+  ${Media.phone`
+
+  `}
 `
 
 const IntroTitle = styled.h2`
  font-size: 32px;
- line-height: 1.3em;
+ line-height: .8em;
+ ${Media.phone`
+  line-height: 1.3em;
+ `}
 `
 
 const IntroText = styled.p`
   font-size: 16px;
   margin: 0;
+  line-height: 1.3em;
+  ${Media.phone`
+    line-height: 1.5em;
+  `}
 ` 
 
 
@@ -94,7 +118,7 @@ const IndexPage = ({data}) => (
     <SEO title="Home" keywords={[`millennium park`, `chicago`, `tourism`]} />
     <HeroContainer>
       <IndexTitle>MILLENNIUM PARK</IndexTitle>
-      <IndexHero />
+      <IndexHeroImg fluid={data.fileName.childImageSharp.fluid} />
     </HeroContainer>
 
 
@@ -108,7 +132,7 @@ const IndexPage = ({data}) => (
     <IndexContainer>
 
       <SectionContainer color={"linear-gradient(to right, #3fc8f4, #74ddff)"}>
-        <SectionTitle>FIND US</SectionTitle>
+        <SectionTitle><Icon src={mapicon} />FIND US</SectionTitle>
 
         <SectionSubTextContainer>
           <SubImage src={mpmap} />
@@ -128,6 +152,10 @@ const IndexPage = ({data}) => (
           <SubText>We've got several parking garages for guests to choose from. <ExternalLink href="https://www.millenniumgarages.com/">Learn more</ExternalLink> and pay online to save up to 50% on parking rates!</SubText>
         </SectionSubTextContainer>
       </SectionContainer>
+
+    
+
+      <SectionSubContainer>
 
       <SectionContainer color={"linear-gradient(to right, #7796cd, #86a6e0)"}>
         <SectionTitle>VISIT US</SectionTitle>
@@ -161,10 +189,13 @@ const IndexPage = ({data}) => (
 
           <SectionSubTextContainer>
           <SectionLinks>
-            <SectionLinkItem><SocialIcon src={fbicon} /></SectionLinkItem>
+            <SectionLinkItem></SectionLinkItem>
           </SectionLinks>
         </SectionSubTextContainer>
       </SectionContainer>
+
+      </SectionSubContainer>
+
 
     </IndexContainer>
 
@@ -175,6 +206,13 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
+    fileName: file(relativePath: {eq: "mphero.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 7000, maxHeight: 7000) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     allPrismicArticle {
       edges {
         node {

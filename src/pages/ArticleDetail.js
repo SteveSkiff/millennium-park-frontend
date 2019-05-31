@@ -33,7 +33,8 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
             <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
 
             <PageHeroContainer>
-                <PageHeroTitle>{data.title.text.toUpperCase()}</PageHeroTitle>
+                <PageHeroImage src={data.hero_image.url} />
+                <PageHeroTitle category={data.category.uid}>{data.title.text.toUpperCase()}</PageHeroTitle>
             </PageHeroContainer>
 
             {data.introduction_text ? <IntroText>{data.introduction_text.text}</IntroText> : (null) }

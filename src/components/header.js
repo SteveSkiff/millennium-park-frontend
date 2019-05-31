@@ -12,16 +12,23 @@ const NavContainer = styled.ul`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  transition: 0.3s ease;
-  height: 100vh;s
+  transition: 0.2s ease;
+  height: 200px;
   ${Media.phone`
     margin: 0;
+    justify-self: flex-end;
+    align-self: left;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    transition: 0.2s ease;
+    height: 100vh;
   `}
 `
 
 const HeaderContainer = styled.header`
   background: ${props => props.background};
-  position: ${props => props.position};
+  position: absolute;
   z-index: 1000;
   margin: 0;
   padding: 0;
@@ -29,8 +36,18 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  
   ${Media.phone`
     margin: 0;
+    background: ${props => props.background};
+    position: ${props => props.position};
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
   `}
 `
 
@@ -48,53 +65,98 @@ const DropdownBtn = styled.div`
   margin-left: auto;
   margin-top: 0px;
   margin-right: 20px;
-  padding: 5px;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+  ${Media.phone`
+
+  `}
 `
 
 const NavImg = styled.img`
   width: 120px;
   padding: 10px;
   margin: 0 10px;
+  cursor: pointer;
+  ${Media.phone`
+  
+  `}
 `
 
 const MenuList = styled.ul`
   list-style-type: none;
   display: flex;
   margin: 10px 0px 10px 0px;
+  ${Media.phone`
+    list-style-type: none;
+    display: flex;
+    margin: 10px 0px 10px 0px;
+  `}
 `
 
 const DropdownMenu = styled.div`
   display: block;
-  position: fixed;
-  transition: 0.3s ease;
-  height: 100vh;
+  transition: 0.2s ease;
+  height: 200px;
+  ${Media.phone`
+    display: block;
+    position: fixed;
+    transition: 0.2s ease;
+    height: 100vh;
+    margin-left: 5%;
+  `}
 `
 
 const MenuItem = styled.li`
   text-decoration:none;
+  display: flex;
   margin-left: 0px;
+  ${Media.phone`
+    flex-direction: column;
+  `}
 `
 
 const MenuSubList = styled.ul`
   margin: 30px 0px;
   margin-top: 0px;
+  margin-right: 60px;
   list-style-type: none;
+  ${Media.phone`
+    margin: 20px 0px;
+    margin-right: 0;
+  `}
 `
 
 const MenuSubTitle = styled.p`
   margin: 0%;
+  margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
   color: white;
   text-shadow: 1px 1px 0px black;
+  ${Media.phone`
+    margin: 0%;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 0px black;
+  `}
 `
 
 const Underline = styled.span`
-  border-bottom: 3px solid ${props => props.color};
+  border-bottom: 5px solid ${props => props.color};
+  ${Media.phone`
+  
+  `}
 `
 
 const MenuSubItem = styled(MenuItem)`
-  margin: 10px;
+  margin: 0px;
+  ${Media.phone`
+    margin: 10px;
+  `}
 `
 
 
@@ -123,11 +185,15 @@ class Header extends React.Component {
   }
 
   closeMenu(event) {
-    if(!this.dropdownMenu.contains(event.target)) {
-      this.setState({showMenu: false}, () => (
-        document.removeEventListener('click', this.closeMenu)
-      ));
+
+    if(this.dropdownMenu) {
+      if(!this.dropdownMenu.contains(event.target)) {
+        this.setState({showMenu: false}, () => (
+          document.removeEventListener('click', this.closeMenu)
+        ));
+      }
     }
+
   }
 
 
@@ -135,62 +201,62 @@ class Header extends React.Component {
     return (
       <HeaderContainer position={this.state.showMenu === true ? "fixed" : "absolute"} background={this.state.showMenu === true ? "linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, 1), rgba(48, 91, 160, 1))" : "none"}>
         <LogoAndDropdownContainer>
-          <Link to="/"><NavImg src={this.state.showMenu === true ? mplogowhite : mplogoblack} /></Link>
+          <Link to="/"><NavImg src={mplogowhite} /></Link>
           <DropdownBtn onClick={this.showMenu}>{this.state.showMenu ? "\u25b2" : "\u25bc"}</DropdownBtn>
         </LogoAndDropdownContainer>
       
           <NavContainer>
           {this.state.showMenu ? 
-                  ( <DropdownMenu ref={(element) => {this.dropdownMenu = element;}}>
+                  ( <DropdownMenu ref={(element) => {this.dropdownMenu = element}}>
                       <MenuList>
                           <MenuItem>
                             <MenuSubList>
-                              <MenuSubTitle><Underline color={'lightgreen'}>PLAN</Underline></MenuSubTitle>
+                              <MenuSubTitle><Underline color={'#47bfa4'}>PLAN</Underline></MenuSubTitle>
                               {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "plan") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "plan") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                             </MenuSubList>
                             <MenuSubList>
-                            <MenuSubTitle><Underline color={'yellow'}>LEARN</Underline></MenuSubTitle>
+                            <MenuSubTitle><Underline color={'#ffc20f'}>LEARN</Underline></MenuSubTitle>
                             {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "learn") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "learn") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                             </MenuSubList>
                             <MenuSubList>
-                            <MenuSubTitle><Underline color={'lightpink'}>PARTNER</Underline></MenuSubTitle>
+                            <MenuSubTitle><Underline color={'#f27bb1'}>PARTNER</Underline></MenuSubTitle>
                             {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "partner") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "partner") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}

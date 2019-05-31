@@ -34,7 +34,8 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
             <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
 
             <PageHeroContainer>
-                <PageHeroTitle>{data.content_list_title.text.toUpperCase()}</PageHeroTitle>
+                <PageHeroImage src={data.content_list_hero_image.url} />
+                <PageHeroTitle category={data.category.uid}>{data.content_list_title.text.toUpperCase()}</PageHeroTitle>
             </PageHeroContainer>
 
             <ContentListContainer>
@@ -65,11 +66,17 @@ export const ContentListQuery = graphql`
         prismicContentList (uid: {eq: $uid}) {
             uid
             data {
+                category {
+                    uid
+                }
                 content_list_title {
                     text
                 }
                 content_list_introduction {
                     text
+                }
+                content_list_hero_image {
+                    url
                 }
                 content_list_item {
                     content_list_item_image {

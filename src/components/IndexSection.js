@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import Media from './Breakpoints'
 
 const SectionContainer = styled.section`
-    margin: 0px 0;
-    padding: 80px 5%;
+    padding: 80px 40px;
     background: ${props => props.color};
+    ${Media.phone`
+        margin: 0px 0;
+        padding: 80px 5%;
+    `}
 `
 
 const SectionTitle = styled.h3`
@@ -22,7 +25,7 @@ const SectionLinks = styled.ul`
     list-style-type: none;
     margin: 10px 0px;
     padding: 0px 10px;
-    border-left: 5px solid black;
+    border-left: 5px solid white;
 `
 
 const SectionLinkItem = styled.li`
@@ -75,7 +78,20 @@ const SubText = styled.p`
 
 const ExternalLink = styled.a`
     font-weight: bold;
-    border-bottom: 5px solid white;
+`
+
+const SectionSubContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+const Icon = styled.img`
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    margin-bottom: -5px;
+    margin-right: 5px;
 `
 
 export {
@@ -88,8 +104,9 @@ export {
     SectionSubTextContainer,
     SubTextContainer,
     SubImage,
-    SocialIcon,
+    Icon,
     SubTextTitle,
     SubText,
     ExternalLink,
+    SectionSubContainer,
 }

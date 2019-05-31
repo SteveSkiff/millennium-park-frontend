@@ -46,9 +46,10 @@ a {
   -webkit-text-decoration-skip: objects;
   text-shadow: 1px 1px rgba(0, 0, 0, .2);;
   color: #ffffff;
-  transition: 0.3s ease-in;
+  transition: 0.2s ease;
+  font-weight: bold;
   &:hover {
-    transition: 0.3s ease-in;
+    transition: 0.2s ease;
     text-decoration: underline;
   }
 }
@@ -197,6 +198,7 @@ html {
   font: 112.5%/1.45em 'Lato', sans-serif;
   box-sizing: border-box;
   overflow-y: scroll;
+  background-color: #F8F8FF
 }
 * {
   box-sizing: inherit;
@@ -392,7 +394,7 @@ p {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
+  margin-bottom: 1rem;
 }
 figure {
   margin-left: 0;
