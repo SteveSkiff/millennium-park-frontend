@@ -6,38 +6,23 @@ import Media from '../components/Breakpoints'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const ContentWrapper = styled.div`
-    margin: 0 10%;
-    margin-bottom: 50px;
-    ${Media.phone`
-        margin: 0 5%;
-    `}
-`
+import {
+    PageHeroContainer,
+    PageHeroTitle,
+    PageHeroImage,
+} from '../components/PageHero'
 
-const PageTitle = styled.h1`
-    margin: 50px 10%;
-    margin-bottom: 0;
-    ${Media.phone`
-        margin: 50px 5%;
-        margin-bottom: 0;
-    `}
-` 
+import IntroText from '../components/IntroText'
 
-const BreadcrumbContainer = styled.div`
-    margin: 2px 10%;
-    margin-bottom: 50px;
-    ${Media.phone`
-        margin: 0 5%;
-        margin-bottom: 50px;
-    `}
-`
+import {
+    SectionContainer,
+    Section,
+    SectionTitle,
+    SectionText,
+} from '../components/ArticleSection'
 
-const BodyText = styled.div`
-    margin: 40px 10%;
-    ${Media.phone`
-        margin: 40px 5%;
-    `}
-`
+
+
 
 
 const ArticleDetail = ({data: {prismicArticle}}) => {
@@ -46,8 +31,27 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
     return (
         <Layout>
             <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
-            <PageTitle>{data.title.text.toUpperCase()}</PageTitle>
-            <BodyText dangerouslySetInnerHTML={{__html: `${data.body.html}`}} />
+
+            <PageHeroContainer>
+                <PageHeroTitle>{data.title.text.toUpperCase()}</PageHeroTitle>
+            </PageHeroContainer>
+
+            {data.introduction_text ? <IntroText>{data.introduction_text.text}</IntroText> : (null) }
+
+            <SectionContainer>
+                {data.sections.map((section, key) => {
+                    return (
+                        <Section key={key}>
+                            <SectionTitle>{section.section_title.text}</SectionTitle>
+                            <SectionText dangerouslySetInnerHTML={
+                                {__html: section.section_text.html,}
+                            } />
+                        </Section>
+                    )
+                })}
+            </SectionContainer>
+
+    
 
         </Layout>
     )
@@ -61,11 +65,25 @@ export const ArticleQuery = graphql`
         prismicArticle (uid: {eq: $uid}) {
             uid
             data {
-                title {
-                    text
+                category {
+                  uid
                 }
-                body {
+                hero_image {
+                  url
+                }
+                title {
+                  text
+                }
+                introduction_text {
+                  text
+                }
+                sections {
+                  section_title {
+                    text
+                  }
+                  section_text {
                     html
+                  }
                 }
             }
         }

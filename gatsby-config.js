@@ -25,27 +25,9 @@ module.exports = {
         linkResolver: ({node, key, value}) => article => `/${article.uid}`,
       }
     },
-    // {
-    //   resolve: `gatsby-source-mongodb`,
-    //   options: { 
-    //     server: { address: `cluster0-shard-00-01-ytisr.mongodb.net`, port: `27017`},
-    //     dbName: `millenium-park`, 
-    //     collection: `sections`,
-    //     auth: { user: `steveskiff`, password: `${process.env.MONGODB_ADMIN_PW}` },
-    //     extraParams: { replicaSet: `Cluster0-shard-0`, ssl: true, authSource: `admin`}
-    //    },
-    // },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-source-strapi`,
-    //   options: {
-    //     apiURL:`http://localhost:1337`,
-    //     contentTypes:[`article`, `section`],
-    //     queryLimit: 1000,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -55,11 +37,8 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/mplogo600(White).png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // 'gatsby-plugin-offline',
   ],
 }

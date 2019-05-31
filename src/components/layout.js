@@ -23,12 +23,43 @@ const Layout = ({ children }) => (
             title
           }
         }
+        allPrismicArticle {
+          edges {
+            node {
+              slugs
+              data {
+                category {
+                  uid
+                }
+                title {
+                  text
+                }
+                
+              }
+            }
+          }
+        }
+        allPrismicContentList {
+          edges {
+            node {
+              slugs
+              data {
+                category {
+                  uid
+                }
+                content_list_title {
+                  text
+                }
+              }
+            }
+          }
+        }
       }
     `}
     render={data => (
       <>
       
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={data.site.siteMetadata.title} navArticleData={data.allPrismicArticle.edges} navContentListData={data.allPrismicContentList.edges} />
 
         <MainContainer>{children}</MainContainer>
 

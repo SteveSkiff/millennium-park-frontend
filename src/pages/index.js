@@ -2,46 +2,62 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from 'styled-components'
 import Media from '../components/Breakpoints'
-import mpbean from '../images/mp-bean.jpg'
 import { graphql } from 'gatsby'
+
+import mpbean from '../images/mphero.jpg'
+import fbicon from "../images/icon_fb.svg"
+import mpmap from '../images/mpmap.jpg'
+
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import {
+  SectionContainer,
+  SectionTitle,
+  SectionIntro,
+  SectionLinks,
+  SectionLinkItem,
+  ColorHighlight,
+  SectionSubTextContainer,
+  SubTextContainer,
+  SubImage,
+  SocialIcon,
+  SubTextTitle,
+  SubText,
+  ExternalLink,
+} from '../components/IndexSection'
+
 const IndexContainer = styled.section`
   display: flex;
   flex-direction: row;
+  padding: 0;
   ${Media.tablet`
     flex-direction: column;
   `}
 `
 
 const HeroContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+  position: relative;
 `
 
 const IndexTitle = styled.h1`
-  font-size: 35px;
+  position: absolute;
+  font-size: 55px;
   font-weight: bold;
-  margin-top: -40px;
-  margin-left: 10px;
+  bottom: 1%;
+  left: 0;
+  margin-left: 5%;
+  line-height: 42px;
   z-index: 3;
-  grid-column-start: 1;
-  grid-column-end: span 2;
   color: white;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.4);
 `
-
-const SectionContainer = styled.section`
-  margin: 40px 10px;
-`
-
-
 
 const IndexHero = styled.section`
   text-align: center;
   background-color: blue;
-  height: 200px;
+  height: 100vh;
   width: 100%;
   background-image: url("${mpbean}");
   background-size: cover;
@@ -54,85 +70,24 @@ const IndexHero = styled.section`
   `}
 `
 
-const TileTitle = styled.p`
-  /* color: red; */
-  /* mix-blend-mode: hue; */
-  z-index: 3;
-  font-weight: 900;
-  font-size: 1.5em;
-  line-height: 1em;
-  margin-bottom: 0;
-  margin: -20px 0px;
-  grid-column-start: 1;
-  letter-spacing: 4px;
-  /* background: linear-gradient(to top, rgba(30, 80, 149, .8), rgba(48, 91, 160, .5), rgba(48, 91, 160, 0)); */
-  text-shadow: 1px 1px rgba(0, 0, 0, .2);
-  ${Media.phone`
-    font-size: 2em;
-    /* background: linear-gradient(to top, rgba(30, 80, 149, .8), rgba(48, 91, 160, .5), rgba(48, 91, 160, 0)); */
-  `}
-`
-
-const ListContainer = styled.ul`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-height: 100px;
-  list-style-type: none;
-  margin: 0;
-  margin-left: 0px;
-`
-const ListItem = styled.li`
-  font-size: 16px;
-  margin: 10px 10px;
-`
-
-const ListLink = styled(Link)`
-  background-color: orange;
-  padding: 8px;
-`
-
-
 const IntroductionContainer = styled.section`
-  margin: 80px 10px;
+  padding: 100px 5%;
+  margin: 0;
+  background: ${props => props.color};
 `
 
 const IntroTitle = styled.h2`
- font-size: 28px;
+ font-size: 32px;
  line-height: 1.3em;
 `
 
 const IntroText = styled.p`
   font-size: 16px;
-  border-left: 5px solid black;
-  padding: 5px;
-  padding-left: 10px;
+  margin: 0;
 ` 
 
-const ColorHighlight = styled.span`
-  background-color: ${props => props.color};
-  padding: 5px;
-`
 
-const TileText = styled.p`
-  font-size: 16px;
-  margin: 0;
-  grid-row-start: 2;
-  place-self: center;
-`
 
-const TileImage = styled.img`
-  height: 100px;
-  width: 100px;
-  background: lightgrey;
-  grid-column-start: 1;
-  grid-row-start: 2;
-`
-
-const ImgAndTextContainer = styled.div`
-  display: flex;
-
-`
 
 const IndexPage = ({data}) => (
   <Layout>
@@ -144,63 +99,75 @@ const IndexPage = ({data}) => (
 
 
 
-    <IntroductionContainer>
-      <IntroTitle><ColorHighlight color="pink">DISCOVER</ColorHighlight> AN URBAN ICON OF <ColorHighlight color="lightgreen">CULTURE</ColorHighlight></IntroTitle>
+    <IntroductionContainer color={"linear-gradient(to right, #bcbdc1, #d3d5df)"}>
+      <IntroTitle><ColorHighlight color="linear-gradient(to right, #f27bb1, #ff9fcb)">DISCOVER</ColorHighlight> AN URBAN ICON OF <ColorHighlight color="linear-gradient(to right, #68bfab, #7fd9c5)">CULTURE</ColorHighlight></IntroTitle>
       <IntroText>A state-of-the-art collection of architecture, landscape design and art that provide the backdrop for hundreds of free cultural programs including concerts, exhibitions, tours, and family activities. In Millennium Park, you’ll find a new kind of town square – a lively, spectacular gathering spot located in the heart of the city and a destination for Chicagoans and visitors alike.</IntroText>
     </IntroductionContainer>
 
 
-
     <IndexContainer>
-      <SectionContainer>
-        <TileTitle>FIND US</TileTitle>
-        <TileImage />
-        <TileText>
-          Millennium Park <br />
+
+      <SectionContainer color={"linear-gradient(to right, #3fc8f4, #74ddff)"}>
+        <SectionTitle>FIND US</SectionTitle>
+
+        <SectionSubTextContainer>
+          <SubImage src={mpmap} />
+          <SubText margin={"left"}>Millennium Park <br />
           201 E. Randolph St. <br />
-          Chicago, IL 60601
-        </TileText>
+          Chicago, IL 60601</SubText>
+        </SectionSubTextContainer>
+
+        <SectionSubTextContainer direction={"column"}>
+          <SubTextTitle>From the CTA:</SubTextTitle>
+          <SubText>Walk east from the Washington/Wabash 'L' stop.
+          Served by buses 3, 4, 6, J14, 20, 56, 60, 124, 146, 147, 151, 157.</SubText>
+        </SectionSubTextContainer>
+
+        <SectionSubTextContainer direction={"column"}>
+          <SubTextTitle>If You're Driving:</SubTextTitle>
+          <SubText>We've got several parking garages for guests to choose from. <ExternalLink href="https://www.millenniumgarages.com/">Learn more</ExternalLink> and pay online to save up to 50% on parking rates!</SubText>
+        </SectionSubTextContainer>
       </SectionContainer>
 
+      <SectionContainer color={"linear-gradient(to right, #7796cd, #86a6e0)"}>
+        <SectionTitle>VISIT US</SectionTitle>
 
-      {/* <GridArticle>
-        <TileTitle>PLAN</TileTitle>
+        <SectionSubTextContainer>
+          <SubText><strong>Admission is FREE for all guests!</strong> <br />Escape the city noise every day between 6AM and 11PM.
+          Our Welcome Center is open daily from 9AM to 5PM for any questions you may have about the park.</SubText>
+        </SectionSubTextContainer>
 
-        <TileArticleList>
-          {data.allPrismicArticle.edges.map(document => {
-            
-            if(document.node.data.category.uid === "plan") {
-              return <TileArticleItem><TileArticleLink to={document.node.uid}>{document.node.data.title.text}</TileArticleLink></TileArticleItem>
-            }
-          
-          })}
-        </TileArticleList>
-      </GridArticle>
-      <GridArticle>
-        <TileTitle>LEARN</TileTitle>
-        <TileArticleList>
-          {data.allPrismicArticle.edges.map(document => {
-            
-            if(document.node.data.category.uid === "learn") {
-              return <TileArticleItem><TileArticleLink to={document.node.uid}>{document.node.data.title.text}</TileArticleLink></TileArticleItem>
-            }
-          
-          })}
-        </TileArticleList>
-      </GridArticle>
-      <GridArticle>
-        <TileTitle>PARTNER</TileTitle>
-        <TileArticleList>
-          {data.allPrismicArticle.edges.map(document => {
-            
-            if(document.node.data.category.uid === "partner") {
-              return <TileArticleItem><TileArticleLink to={document.node.uid}>{document.node.data.title.text}</TileArticleLink></TileArticleItem>
-            }
-          
-          })}
-        </TileArticleList>
-      </GridArticle> */}
+        <SectionSubTextContainer>
+          <SectionLinks>
+            {data.allPrismicArticle.edges.map(article => {
+              if(article.node.data.category.uid === "plan") {
+                return (
+                  <SectionLinkItem><Link to={`/${article.node.data.category.uid}/${article.node.slugs}/`}>{article.node.data.title.text} &#9656;</Link></SectionLinkItem>
+                )
+              }
+            })}
+
+          </SectionLinks>
+        </SectionSubTextContainer>
+      </SectionContainer>
+
+      <SectionContainer color={"linear-gradient(to right, #f7a13a, #ffa840)"}>
+          <SectionTitle>CONTACT US</SectionTitle>
+
+          <SectionSubTextContainer>
+            <SubText><ExternalLink>312.742.1168</ExternalLink> <br />
+            <ExternalLink mailto='dcase@cityofchicago.org'>dcase@cityofchicago.org</ExternalLink></SubText>
+          </SectionSubTextContainer>
+
+          <SectionSubTextContainer>
+          <SectionLinks>
+            <SectionLinkItem><SocialIcon src={fbicon} /></SectionLinkItem>
+          </SectionLinks>
+        </SectionSubTextContainer>
+      </SectionContainer>
+
     </IndexContainer>
+
   </Layout>
 )
 
@@ -212,16 +179,13 @@ export const pageQuery = graphql`
       edges {
         node {
           uid
-          type
+          slugs
           data {
             category {
               uid
             }
             title {
               text
-            }
-            body {
-              html
             }
           }
         }

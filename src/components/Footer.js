@@ -8,7 +8,7 @@ const FooterContainer = styled.footer`
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 100px;
-    background-color: #5d5f68ff;
+    background: linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, .9), rgba(48, 91, 160, .9));
     color: white;
     ${Media.tablet`
         grid-template-rows: 150px;
@@ -41,7 +41,7 @@ const ListItem = styled.li`
     list-style-type: none;
     ${Media.tablet`
         margin: 0 0px;
-        padding: 10px; 
+        padding: 5px 10px; 
     `}
 ` 
 

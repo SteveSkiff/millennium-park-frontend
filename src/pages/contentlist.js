@@ -1,19 +1,29 @@
 import React from "react"
 import { graphql, Link } from 'gatsby'
-import styled from 'styled-components'
 import Media from '../components/Breakpoints'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const PageTitle = styled.h1`
-    margin: 50px 10%;
-    margin-bottom: 0;
-    ${Media.phone`
-        margin: 50px 5%;
-        margin-bottom: 0;
-    `}
-` 
+import {
+    PageHeroContainer,
+    PageHeroTitle,
+    PageHeroImage,
+} from '../components/PageHero'
+
+import {
+    ContentListContainer,
+    ContentListItem,
+    ContentListItemImg,
+    ContentListItemTextContainer,
+    ContentListItemTitle,
+    ContentListItemText,
+    ContentListItemLink,
+    ContentListItemFooter,
+} from '../components/ContentListItem'
+
+
+
 
 
 const ContentListTemplate = ({data: {prismicContentList}}) => {
@@ -22,7 +32,26 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
     return (
         <Layout>
             <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
-            <PageTitle>{data.content_list_title.text.toUpperCase()}</PageTitle>
+
+            <PageHeroContainer>
+                <PageHeroTitle>{data.content_list_title.text.toUpperCase()}</PageHeroTitle>
+            </PageHeroContainer>
+
+            <ContentListContainer>
+                {data.content_list_item.map((item, key) => {
+                    return (
+                        <ContentListItem key={key}>
+                            {item.content_list_item_image ? <ContentListItemImg src={item.content_list_item_image.url} /> : (null)}
+                            <ContentListItemTextContainer>
+                                <ContentListItemTitle>{item.content_list_item_title.text}</ContentListItemTitle>
+                                <ContentListItemText>{item.content_list_item_text1.text}</ContentListItemText>
+                                {item.content_list_item_link ? <ContentListItemLink href={item.content_list_item_link.url}>Click Here</ContentListItemLink> : (null)}
+                            </ContentListItemTextContainer>
+                        </ContentListItem>
+                    )
+                })}
+            </ContentListContainer>
+
 
         </Layout>
     )
