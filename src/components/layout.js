@@ -6,12 +6,27 @@ import styled from "styled-components"
 import Header from "./header"
 import Footer from './Footer'
 import "./layout.scss"
+import colorbackground from '../images/greyprism.svg'
 
 const MainContainer = styled.main`
   min-height: 100vh;
   overflow: hidden;
   display: block;
   position: relative;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;   
+    width: 100%;
+    height: 100%;
+    background-image: url(${colorbackground});
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 `
 
 const Layout = ({ children }) => (

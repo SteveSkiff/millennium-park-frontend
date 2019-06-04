@@ -6,7 +6,7 @@ import Seal from '../images/SealOfChi.png'
 
 const FooterContainer = styled.footer`
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 5fr;
     grid-template-rows: 100px;
     background: linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, .9), rgba(48, 91, 160, .9));
     color: white;
@@ -19,10 +19,19 @@ const FooterContainer = styled.footer`
 const FooterList = styled.ul`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-self: center;
     margin: 0;
+    margin-right: 5%;
     flex-wrap: wrap;
+    ${Media.tablet`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-self: center;
+        margin: 0;
+        flex-wrap: wrap;
+    `}
 `
 
 const LogoImg = styled.img`
@@ -38,6 +47,7 @@ const LogoImg = styled.img`
 const ListItem = styled.li`
     margin: 0 10px;
     padding: 10px;
+    font-size: 16px;
     list-style-type: none;
     ${Media.tablet`
         margin: 0 0px;

@@ -4,7 +4,6 @@ import React from "react"
 import styled from 'styled-components'
 import Media from '../components/Breakpoints'
 import mplogowhite from '../images/mplogo600(White).png'
-import mplogoblack from '../images/mplogo600.png'
 
 const NavContainer = styled.ul`
   justify-self: flex-end;
@@ -13,7 +12,8 @@ const NavContainer = styled.ul`
   flex-direction: column;
   flex-wrap: wrap;
   transition: 0.2s ease;
-  height: 200px;
+  height: auto;
+  margin-bottom: 0;
   ${Media.phone`
     margin: 0;
     justify-self: flex-end;
@@ -99,12 +99,12 @@ const MenuList = styled.ul`
 const DropdownMenu = styled.div`
   display: block;
   transition: 0.2s ease;
-  height: 200px;
+  height: auto;
   ${Media.phone`
     display: block;
     position: fixed;
     transition: 0.2s ease;
-    height: 100vh;
+    height: 85vh;
     margin-left: 5%;
   `}
 `
@@ -124,7 +124,7 @@ const MenuSubList = styled.ul`
   margin-right: 60px;
   list-style-type: none;
   ${Media.phone`
-    margin: 20px 0px;
+    margin: 5px 0px;
     margin-right: 0;
   `}
 `

@@ -1,7 +1,5 @@
 import React from "react"
-import { graphql, Link } from 'gatsby'
-import styled from 'styled-components'
-import Media from '../components/Breakpoints'
+import { graphql } from 'gatsby'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -12,7 +10,10 @@ import {
     PageHeroImage,
 } from '../components/PageHero'
 
-import IntroText from '../components/IntroText'
+import { 
+    IntroContainer,
+    IntroText,
+ } from '../components/IntroText'
 
 import {
     SectionContainer,
@@ -37,14 +38,16 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
                 <PageHeroTitle category={data.category.uid}>{data.title.text.toUpperCase()}</PageHeroTitle>
             </PageHeroContainer>
 
-            {data.introduction_text ? <IntroText>{data.introduction_text.text}</IntroText> : (null) }
+            <IntroContainer category={data.category.uid}>
+                {data.introduction_text ? <IntroText>{data.introduction_text.text}</IntroText> : (null) }
+            </IntroContainer>
 
             <SectionContainer>
                 {data.sections.map((section, key) => {
                     return (
                         <Section key={key}>
                             <SectionTitle>{section.section_title.text}</SectionTitle>
-                            <SectionText dangerouslySetInnerHTML={
+                            <SectionText category={data.category.uid} dangerouslySetInnerHTML={
                                 {__html: section.section_text.html,}
                             } />
                         </Section>

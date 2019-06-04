@@ -6,7 +6,14 @@ import { graphql } from 'gatsby'
 import Img from "gatsby-image"
 
 import mapicon from "../images/icon_map.png"
+import busicon from '../images/icon_bus.png'
+import phoneicon from '../images/icon_phone.png'
 import mpmap from '../images/mpmap.jpg'
+
+import yticon from '../images/icon_yt.png'
+import fbicon from '../images/icon_fb.png'
+import twicon from '../images/icon_tw.png'
+import igicon from '../images/icon_ig.png'
 
 
 import Layout from "../components/layout"
@@ -15,12 +22,10 @@ import SEO from "../components/seo"
 import {
   SectionContainer,
   SectionTitle,
-  SectionIntro,
   SectionLinks,
   SectionLinkItem,
   ColorHighlight,
   SectionSubTextContainer,
-  SubTextContainer,
   SubImage,
   Icon,
   SubTextTitle,
@@ -33,10 +38,11 @@ const IndexContainer = styled.section`
   display: flex;
   flex-direction: row;
   padding: 0;
-  margin: 5%;
-  box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3);
+  /* margin: 5%; */
+  /* box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3); */
   ${Media.tablet`
     flex-direction: column;
+    margin: 0;
   `}
 `
 
@@ -48,7 +54,7 @@ const HeroContainer = styled.div`
   display: flex;
   ${Media.phone`
     position: relative;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -85,9 +91,9 @@ const IndexHeroImg = styled(Img)`
 
 const IntroductionContainer = styled.section`
   padding: 80px 5%;
-  margin: 40px 0px;
+  margin: 0px;
   background: ${props => props.color};
-  box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3);
+  /* box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3); */
   ${Media.phone`
 
   `}
@@ -142,14 +148,24 @@ const IndexPage = ({data}) => (
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
-          <SubTextTitle>From the CTA:</SubTextTitle>
+          <SubTextTitle>From the Trains:</SubTextTitle>
           <SubText>Walk east from the Washington/Wabash 'L' stop.
-          Served by buses 3, 4, 6, J14, 20, 56, 60, 124, 146, 147, 151, 157.</SubText>
+          For more information on 'L' lines and schedules, <ExternalLink target='_blank' href="https://www.transitchicago.com/schedules/">find out more here.</ExternalLink></SubText>
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
           <SubTextTitle>If You're Driving:</SubTextTitle>
-          <SubText>We've got several parking garages for guests to choose from. <ExternalLink href="https://www.millenniumgarages.com/">Learn more</ExternalLink> and pay online to save up to 50% on parking rates!</SubText>
+          <SubText>We've got several parking garages for guests to choose from. <ExternalLink target="_blank" href="https://www.millenniumgarages.com/">Learn more</ExternalLink> and pay online to save up to 50% on parking rates!</SubText>
+        </SectionSubTextContainer>
+
+        <SectionSubTextContainer direction={"column"}>
+          <SubTextTitle>By Bus:</SubTextTitle>
+          <SubText>The park is accessable and served by buses 3, 4, 6, J14, 20, 56, 60, 124, 146, 147, 151, 157. For bus schedules by line, <ExternalLink target="_blank" href='https://www.transitchicago.com/schedules/'>click here.</ExternalLink></SubText>
+        </SectionSubTextContainer>
+
+        <SectionSubTextContainer direction={"column"}>
+          <SubTextTitle>Via Bike:</SubTextTitle>
+          <SubText>Accessable via the Lakefront Trail, located one block east. Bike parking is available along the edges of the park. For Divvy riders, we have a parking station located on the southwest corner of the park on Michigan Ave. Learn more about the Divvy program <ExternalLink target="_blank" href='https://www.divvybikes.com'>here.</ExternalLink></SubText>
         </SectionSubTextContainer>
       </SectionContainer>
 
@@ -158,7 +174,7 @@ const IndexPage = ({data}) => (
       <SectionSubContainer>
 
       <SectionContainer color={"linear-gradient(to right, #7796cd, #86a6e0)"}>
-        <SectionTitle>VISIT US</SectionTitle>
+        <SectionTitle><Icon src={busicon} />VISIT US</SectionTitle>
 
         <SectionSubTextContainer>
           <SubText><strong>Admission is FREE for all guests!</strong> <br />Escape the city noise every day between 6AM and 11PM.
@@ -166,7 +182,7 @@ const IndexPage = ({data}) => (
         </SectionSubTextContainer>
 
         <SectionSubTextContainer>
-          <SectionLinks>
+          <SectionLinks direction="column">
             {data.allPrismicArticle.edges.map(article => {
               if(article.node.data.category.uid === "plan") {
                 return (
@@ -180,7 +196,7 @@ const IndexPage = ({data}) => (
       </SectionContainer>
 
       <SectionContainer color={"linear-gradient(to right, #f7a13a, #ffa840)"}>
-          <SectionTitle>CONTACT US</SectionTitle>
+          <SectionTitle><Icon src={phoneicon} />CONTACT US</SectionTitle>
 
           <SectionSubTextContainer>
             <SubText><ExternalLink>312.742.1168</ExternalLink> <br />
@@ -188,8 +204,11 @@ const IndexPage = ({data}) => (
           </SectionSubTextContainer>
 
           <SectionSubTextContainer>
-          <SectionLinks>
-            <SectionLinkItem></SectionLinkItem>
+          <SectionLinks direction="row">
+            <SectionLinkItem><ExternalLink target="_blank" href="https://www.facebook.com"><Icon type='social'  src={fbicon}/></ExternalLink></SectionLinkItem>
+            <SectionLinkItem><Icon type='social' src={twicon}/></SectionLinkItem>
+            <SectionLinkItem><Icon type='social' src={igicon}/></SectionLinkItem>
+            <SectionLinkItem><Icon type='social'  src={yticon}/></SectionLinkItem>
           </SectionLinks>
         </SectionSubTextContainer>
       </SectionContainer>
