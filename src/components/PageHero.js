@@ -23,6 +23,7 @@ const PageHeroTitle = styled.h1`
     font-size: 36px;
     margin: 0px;
     padding: 30px 5%;
+    padding-bottom: 30px;
     margin-top: -6px;
     margin-bottom: 0;
     color: white;
@@ -41,6 +42,7 @@ const PageHeroTitle = styled.h1`
 
 `
 
+
 const PageHeroImage = styled.img`
     margin: 0;
     padding: 0;
@@ -56,4 +58,5 @@ export {
     PageHeroContainer,
     PageHeroTitle,
     PageHeroImage,
+
 } 

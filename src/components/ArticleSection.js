@@ -32,15 +32,15 @@ const SectionTitle = styled.h2`
 
 const SectionText = styled.div`
     font-size: 16px;
-    padding: 5%;
+    padding: 2%;
     margin: 0;
     border-radius: 3px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     background-color: ${({category}) => 
-        category === 'plan' && 'rgba(71,191,164, 0.3)' ||
-        category === 'learn' && 'rgba(255,194,15, 0.3)' || 
-        category === 'partner' && 'rgba(242,123,177, 0.3)'
+        category === 'plan' && 'rgba(71,191,164, 0.1)' ||
+        category === 'learn' && 'rgba(255,194,15, 0.1)' || 
+        category === 'partner' && 'rgba(242,123,177, 0.1)'
     };
 
     & ul {
@@ -56,7 +56,9 @@ const SectionText = styled.div`
         }
     }
     ${Media.phone`
-        padding: 15 5%;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        padding: 5%;
         & ul {
             & li {
                 margin: 10px 0px;
