@@ -22,9 +22,10 @@ const PageHeroContainer = styled.section`
 const PageHeroTitle = styled.h1`
     font-size: 36px;
     margin: 0px;
-    padding: 30px 5%;
+    padding: 0px 5%;
+    padding-top: 0px;
     padding-bottom: 30px;
-    margin-top: -6px;
+    margin-top: 0px;
     margin-bottom: 0;
     color: white;
     background-color: ${({category}) => 
@@ -35,9 +36,9 @@ const PageHeroTitle = styled.h1`
     width: 100%;
     ${Media.phone`
         font-size: 36px;
-        padding: 30px 5%;
+        
         margin-bottom: -1px;
-        margin-top: -6px;
+        margin-top: 0px;
     `}
 
 `
@@ -58,5 +59,4 @@ export {
     PageHeroContainer,
     PageHeroTitle,
     PageHeroImage,
-
 } 

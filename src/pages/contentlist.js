@@ -11,6 +11,12 @@ import {
 } from '../components/PageHero'
 
 import {
+    BreadcrumbContainer,
+    BreadcrumbText,
+    BreadcrumbLink,
+} from '../components/Breadcrumb'
+
+import {
     IntroContainer,
     IntroText
 } from '../components/IntroText'
@@ -40,6 +46,9 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
 
             <PageHeroContainer>
                 <PageHeroImage src={data.content_list_hero_image.url} />
+                <BreadcrumbContainer category={data.category.uid}>
+                    <BreadcrumbText><BreadcrumbLink to="/">home</BreadcrumbLink> &#8250; {data.category.uid}</BreadcrumbText>
+                </BreadcrumbContainer>
                 <PageHeroTitle category={data.category.uid}>{data.content_list_title.text.toUpperCase()}</PageHeroTitle>
             </PageHeroContainer>
 
@@ -56,7 +65,7 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
                                 <ContentListItemTitle>{item.content_list_item_title.text}</ContentListItemTitle>
                                 <ContentListItemText>{item.content_list_item_text1.text}</ContentListItemText>
                                 {item.content_list_item_link ? 
-                                    <ContentListItemLink target="_blank" href={item.content_list_item_link.url}>Read About {item.content_list_item_title.text}</ContentListItemLink> 
+                                    <ContentListItemLink target="_blank" href={item.content_list_item_link.url}>{item.content_list_item_link.url}</ContentListItemLink> 
                                     : 
                                     (null)
                                 }

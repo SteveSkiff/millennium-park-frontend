@@ -10,6 +10,12 @@ import {
     PageHeroImage,
 } from '../components/PageHero'
 
+import {
+    BreadcrumbContainer,
+    BreadcrumbText,
+    BreadcrumbLink,
+} from '../components/Breadcrumb'
+
 import { 
     IntroContainer,
     IntroText,
@@ -35,6 +41,9 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
 
             <PageHeroContainer>
                 <PageHeroImage src={data.hero_image.url} />
+                <BreadcrumbContainer category={data.category.uid}>
+                    <BreadcrumbText><BreadcrumbLink to="/">home</BreadcrumbLink> &#8250; {data.category.uid}</BreadcrumbText>
+                </BreadcrumbContainer>
                 <PageHeroTitle category={data.category.uid}>{data.title.text.toUpperCase()}</PageHeroTitle>
             </PageHeroContainer>
 

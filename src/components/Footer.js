@@ -49,6 +49,10 @@ const ListItem = styled.li`
     padding: 10px;
     font-size: 16px;
     list-style-type: none;
+    &::before {
+        content: "";
+        margin: 0;
+    }
     ${Media.tablet`
         margin: 0 0px;
         padding: 5px 10px; 

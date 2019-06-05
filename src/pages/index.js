@@ -15,6 +15,13 @@ import fbicon from '../images/icon_fb.png'
 import twicon from '../images/icon_tw.png'
 import igicon from '../images/icon_ig.png'
 
+import {
+  APContainer,
+  APItem,
+  APTitle,
+  APItemWrapper,
+} from '../components/ArticlePreview'
+
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -102,6 +109,7 @@ const IntroductionContainer = styled.section`
 const IntroTitle = styled.h2`
  font-size: 32px;
  line-height: .8em;
+ color: white;
  ${Media.phone`
   line-height: 1.3em;
  `}
@@ -137,8 +145,8 @@ const IndexPage = ({data}) => (
 
     <IndexContainer>
 
-      <SectionContainer color={"linear-gradient(to right, #3fc8f4, #74ddff)"}>
-        <SectionTitle><Icon src={mapicon} />FIND US</SectionTitle>
+      <SectionContainer color={"linear-gradient(to right, #ef59a1, #f27bb1)"}>
+        <SectionTitle color={"#ffbdff"} ><Icon src={mapicon} />FIND US</SectionTitle>
 
         <SectionSubTextContainer>
           <SubImage src={mpmap} />
@@ -148,23 +156,23 @@ const IndexPage = ({data}) => (
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
-          <SubTextTitle>From the Trains:</SubTextTitle>
+          <SubTextTitle color={"#ffbdff"}>From the Trains:</SubTextTitle>
           <SubText>Walk east from the Washington/Wabash 'L' stop.
           For more information on 'L' lines and schedules, <ExternalLink target='_blank' href="https://www.transitchicago.com/schedules/">find out more here.</ExternalLink></SubText>
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
-          <SubTextTitle>If You're Driving:</SubTextTitle>
+          <SubTextTitle color={"#ffbdff"}>If You're Driving</SubTextTitle>
           <SubText>We've got several parking garages for guests to choose from. <ExternalLink target="_blank" href="https://www.millenniumgarages.com/">Learn more</ExternalLink> and pay online to save up to 50% on parking rates!</SubText>
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
-          <SubTextTitle>By Bus:</SubTextTitle>
+          <SubTextTitle color={"#ffbdff"}>By Bus</SubTextTitle>
           <SubText>The park is accessable and served by buses 3, 4, 6, J14, 20, 56, 60, 124, 146, 147, 151, 157. For bus schedules by line, <ExternalLink target="_blank" href='https://www.transitchicago.com/schedules/'>click here.</ExternalLink></SubText>
         </SectionSubTextContainer>
 
         <SectionSubTextContainer direction={"column"}>
-          <SubTextTitle>Via Bike:</SubTextTitle>
+          <SubTextTitle color={"#ffbdff"}>Via Bike</SubTextTitle>
           <SubText>Accessable via the Lakefront Trail, located one block east. Bike parking is available along the edges of the park. For Divvy riders, we have a parking station located on the southwest corner of the park on Michigan Ave. Learn more about the Divvy program <ExternalLink target="_blank" href='https://www.divvybikes.com'>here.</ExternalLink></SubText>
         </SectionSubTextContainer>
       </SectionContainer>
@@ -173,8 +181,8 @@ const IndexPage = ({data}) => (
 
       <SectionSubContainer>
 
-      <SectionContainer color={"linear-gradient(to right, #7796cd, #86a6e0)"}>
-        <SectionTitle><Icon src={busicon} />VISIT US</SectionTitle>
+      <SectionContainer color={"linear-gradient(to right, #5879bc, #86a6e0)"}>
+        <SectionTitle color={"#cdffff"}><Icon src={busicon} />VISIT US</SectionTitle>
 
         <SectionSubTextContainer>
           <SubText><strong>Admission is FREE for all guests!</strong> <br />Escape the city noise every day between 6AM and 11PM.
@@ -195,8 +203,8 @@ const IndexPage = ({data}) => (
         </SectionSubTextContainer>
       </SectionContainer>
 
-      <SectionContainer color={"linear-gradient(to right, #f7a13a, #ffa840)"}>
-          <SectionTitle><Icon src={phoneicon} />CONTACT US</SectionTitle>
+      <SectionContainer color={"linear-gradient(to right, #058464, #06af84)"}>
+          <SectionTitle color={"#00ffdf"}><Icon src={phoneicon} />CONTACT US</SectionTitle>
 
           <SectionSubTextContainer>
             <SubText><ExternalLink>312.742.1168</ExternalLink> <br />
@@ -218,6 +226,18 @@ const IndexPage = ({data}) => (
 
     </IndexContainer>
 
+    <APContainer>
+      {data.allPrismicArticle.edges.map( article => {
+        return (
+          <APItemWrapper to={`/${article.node.data.category.uid}/${article.node.uid}/`}>
+            <APItem image={article.node.data.hero_image.url} >
+              <APTitle>{article.node.data.title.text} </APTitle>
+            </APItem>
+          </APItemWrapper>
+        )
+      })}
+    </APContainer>
+
   </Layout>
 )
 
@@ -238,6 +258,9 @@ export const pageQuery = graphql`
           uid
           slugs
           data {
+            hero_image {
+              url
+            }
             category {
               uid
             }

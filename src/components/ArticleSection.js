@@ -35,6 +35,7 @@ const SectionText = styled.div`
     padding: 2%;
     margin: 0;
     border-radius: 3px;
+    font-weight: 400;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     background-color: ${({category}) => 
@@ -44,15 +45,25 @@ const SectionText = styled.div`
     };
 
     & ul {
+        opacity: 0.8;
         margin-bottom: 0;
         & li {
             margin: 0;
+            & a {
+            color: blue;
+            font-weight: 400;
+        }
+
         }
     }
     & p {
         margin-bottom: 10px;
         &:last-child {
             margin-bottom: 0;
+        }
+        & a {
+            color: blue;
+            font-weight: 400;
         }
     }
     ${Media.phone`

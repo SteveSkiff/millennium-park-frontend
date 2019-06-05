@@ -1,22 +1,26 @@
 import styled from 'styled-components'
 import Media from './Breakpoints'
 
-const SectionContainer = styled.section`
+const SectionContainer = styled.article`
     padding: 80px 40px;
     background: ${props => props.color};
     min-height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 50vw;
     ${Media.phone`
         margin: 0px 0;
         padding: 80px 5%;
+        max-width: 100vw;
     `}
 `
 
 const SectionTitle = styled.h3`
     font-size: 28px;
     margin-bottom: 15px;
+    color: ${props => props.color};
+    line-height: 1rem;
 `
 
 const SectionIntro = styled.p`
@@ -37,6 +41,11 @@ const SectionLinkItem = styled.li`
     margin: 0 10px;
     margin-left: 0;
     font-size: 16px;
+    cursor: pointer;
+    &::before {
+        content: "";
+        margin: 0;
+    }
 `
 
 const ColorHighlight = styled.span`
@@ -45,16 +54,16 @@ const ColorHighlight = styled.span`
   color: white;
 `
 
-const SectionSubTextContainer = styled.div`
+const SectionSubTextContainer = styled.section`
     display: flex;
     flex-direction: ${props => props.direction === "column" ? "column" : "row"};
+    width: 100%;
     
 `
 
 const SubImage = styled.img`
     height: 150px;
     width: 150px;
-    background-color: pink;
     margin: 0;
 `
 
@@ -67,6 +76,7 @@ const SubTextTitle = styled.h4`
     padding: 0;
     font-size: 20px;
     margin-top: 20px;
+    color: ${props => props.color};
 `
 
 const SubText = styled.p`
@@ -76,11 +86,11 @@ const SubText = styled.p`
 `
 
 const ExternalLink = styled.a`
-    font-weight: bold;
     font-size: 16px;
+    cursor: pointer; 
 `
 
-const SectionSubContainer = styled.div`
+const SectionSubContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -89,15 +99,17 @@ const SectionSubContainer = styled.div`
 
 const Icon = styled.img`
     display: inline-block;
-    height: ${props => props.type === "social" ? '40px' : '30px'};
-        width: ${props => props.type === "social" ? '40px' : '30px'};
+    height: ${props => props.type === "social" ? '40px' : '20px'};
+    width: ${props => props.type === "social" ? '40px' : '20px'};
     margin: 0;
-    margin-bottom: -5px;
-    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    filter: invert(100%);
     mix-blend-mode: overlay;
+    opacity: 1;
     ${Media.phone`
-        height: ${props => props.type === "social" ? '50px' : '30px'};
-        width: ${props => props.type === "social" ? '50px' : '30px'};
+        height: ${props => props.type === "social" ? '50px' : '20px'};
+        width: ${props => props.type === "social" ? '50px' : '20px'};
     `}
 `
 

@@ -5,24 +5,27 @@ import styled from 'styled-components'
 import Media from '../components/Breakpoints'
 import mplogowhite from '../images/mplogo600(White).png'
 
+import SlideDown from './Animations'
+
 const NavContainer = styled.ul`
   justify-self: flex-end;
   align-self: left;
-  display: flex;
+  display: ${props => props.state};
   flex-direction: column;
   flex-wrap: wrap;
   transition: 0.2s ease;
-  height: auto;
+  height: 340px;
   margin-bottom: 0;
   ${Media.phone`
     margin: 0;
     justify-self: flex-end;
     align-self: left;
-    display: flex;
+    display: ${props => props.state};
     flex-direction: column;
     flex-wrap: wrap;
     transition: 0.2s ease;
     height: 100vh;
+    z-index: -10;
   `}
 `
 
@@ -89,10 +92,12 @@ const MenuList = styled.ul`
   list-style-type: none;
   display: flex;
   margin: 10px 0px 10px 0px;
+  opacity: 1;
   ${Media.phone`
     list-style-type: none;
     display: flex;
     margin: 10px 0px 10px 0px;
+    opacity: 1;
   `}
 `
 
@@ -100,6 +105,8 @@ const DropdownMenu = styled.div`
   display: block;
   transition: 0.2s ease;
   height: auto;
+  margin-left: 20px;
+  z-index: 3;
   ${Media.phone`
     display: block;
     position: fixed;
@@ -113,8 +120,14 @@ const MenuItem = styled.li`
   text-decoration:none;
   display: flex;
   margin-left: 0px;
+  &::before {
+    content: "";
+    margin: 0;
+  }
   ${Media.phone`
     flex-direction: column;
+    padding-left: 0;
+    margin-left: 0;
   `}
 `
 
@@ -123,6 +136,10 @@ const MenuSubList = styled.ul`
   margin-top: 0px;
   margin-right: 60px;
   list-style-type: none;
+  &::before {
+    list-style: none;
+    padding: 0;
+  }
   ${Media.phone`
     margin: 5px 0px;
     margin-right: 0;
@@ -154,10 +171,21 @@ const Underline = styled.span`
 
 const MenuSubItem = styled(MenuItem)`
   margin: 0px;
+  padding-left: 0;
+  & a {
+    opacity: 1;
+    color: white;
+  }
   ${Media.phone`
-    margin: 10px;
+    margin: 5px;
+    margin-left: 0;
   `}
 `
+
+const ActiveStyle = {
+  fontWeight: "bold",
+  color: "#3fc8f4"
+};
 
 
 
@@ -205,7 +233,7 @@ class Header extends React.Component {
           <DropdownBtn onClick={this.showMenu}>{this.state.showMenu ? "\u25b2" : "\u25bc"}</DropdownBtn>
         </LogoAndDropdownContainer>
       
-          <NavContainer>
+          <NavContainer state={this.state.showMenu === true ? "flex" : "none"}>
           {this.state.showMenu ? 
                   ( <DropdownMenu ref={(element) => {this.dropdownMenu = element}}>
                       <MenuList>
@@ -215,14 +243,14 @@ class Header extends React.Component {
                               {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "plan") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "plan") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
@@ -232,14 +260,14 @@ class Header extends React.Component {
                             {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "learn") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "learn") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
@@ -249,14 +277,14 @@ class Header extends React.Component {
                             {this.props.navArticleData.map(article => {
                                 if(article.node.data.category.uid === "partner") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}
                               {this.props.navContentListData.map(article => {
                                 if(article.node.data.category.uid === "partner") {
                                   return (
-                                    <MenuSubItem><Link to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
+                                    <MenuSubItem><Link exact={true} activeStyle={ActiveStyle} to={`/${article.node.data.category.uid}/${article.node.uid}/`}>{article.node.data.content_list_title.text}</Link></MenuSubItem>
                                   )
                                 }
                               })}

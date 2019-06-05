@@ -74,14 +74,18 @@ const ContentListItemText = styled.p`
 
 const ContentListItemLink = styled.a`
     background: linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, .9), rgba(48, 91, 160, .9));
-    padding: 4px 8px;
+    padding: 5px 10px;
     border-radius: 3px;
+    font-size: 16px;
+    &:hover {
+        text-decoration: none;
+    }
     ${Media.phone`
         padding: 8px 16px;
     `}
 `
 
-const ContentListFooterContainer = styled.article`
+const ContentListFooterContainer = styled.section`
     margin: 40px 3%;
     padding: 2%;
     background-color: #dedee4;
@@ -94,7 +98,7 @@ const ContentListFooterContainer = styled.article`
 const ContentListFooterText = styled.p`
     margin: 0%;
     & h3, h4 {
-        margin: 0;
+        margin: 0px 0px 10px 0px;
     }
     ${Media.phone`
     
