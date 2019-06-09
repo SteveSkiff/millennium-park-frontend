@@ -1,7 +1,7 @@
 {
   "name": "millenium-park",
   "private": true,
-  "description": "A redesign of the Millenium Park, Chicago website.",
+  "description": "A conceptual redesign of the Millenium Park website.",
   "version": "0.1.0",
   "author": "Steve Skiff <stevenkskiff@gmail.com>",
   "dependencies": {

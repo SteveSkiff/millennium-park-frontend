@@ -4,7 +4,8 @@ import Media from './Breakpoints'
 const SectionContainer = styled.article`
     padding: 80px 40px;
     background: ${props => props.color};
-    min-height: 45%;
+    max-height: 50%;
+    min-height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,7 +88,9 @@ const SubText = styled.p`
 
 const ExternalLink = styled.a`
     font-size: 16px;
-    cursor: pointer; 
+    cursor: pointer;
+    opacity: 1; 
+    height: 100%;
 `
 
 const SectionSubContainer = styled.section`

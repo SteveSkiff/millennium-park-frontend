@@ -78,7 +78,10 @@ const ContentListItemLink = styled.a`
     border-radius: 3px;
     font-size: 16px;
     &:hover {
+        transition: 0.2s ease;
         text-decoration: none;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, .7), 0px 0px 5px rgba(0, 0, 0, 0.3);
+        color: white;
     }
     ${Media.phone`
         padding: 8px 16px;
@@ -99,6 +102,12 @@ const ContentListFooterText = styled.p`
     margin: 0%;
     & h3, h4 {
         margin: 0px 0px 10px 0px;
+    }
+    & li {
+        font-weight: 400;
+    }
+    & a {
+        color: blue;
     }
     ${Media.phone`
     

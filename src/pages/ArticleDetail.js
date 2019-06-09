@@ -26,6 +26,8 @@ import {
     Section,
     SectionTitle,
     SectionText,
+    SectionTextContainer,
+    SectionImage
 } from '../components/ArticleSection'
 
 
@@ -37,7 +39,7 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
 
     return (
         <Layout>
-            <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
+            <SEO  title={data.title.text} keywords={[`millenium park`, `chicago`, `tourism`]} />
 
             <PageHeroContainer>
                 <PageHeroImage src={data.hero_image.url} />
@@ -55,10 +57,13 @@ const ArticleDetail = ({data: {prismicArticle}}) => {
                 {data.sections.map((section, key) => {
                     return (
                         <Section key={key}>
-                            <SectionTitle>{section.section_title.text}</SectionTitle>
-                            <SectionText category={data.category.uid} dangerouslySetInnerHTML={
-                                {__html: section.section_text.html,}
-                            } />
+                            {section.section_image.url ? <SectionImage src={section.section_image.url} /> : (null)}
+                            <SectionTextContainer>
+                                <SectionTitle>{section.section_title.text}</SectionTitle>
+                                <SectionText category={data.category.uid} dangerouslySetInnerHTML={
+                                    {__html: section.section_text.html,}
+                                } />
+                            </SectionTextContainer>
                         </Section>
                     )
                 })}
@@ -96,6 +101,9 @@ export const ArticleQuery = graphql`
                   }
                   section_text {
                     html
+                  }
+                  section_image {
+                    url
                   }
                 }
             }

@@ -22,6 +22,7 @@ const APItem = styled.article`
     z-index: 2;
     justify-content: center;
     text-align: center;
+    cursor: pointer;
     &:before {
         position: absolute;
         content:"";
@@ -31,11 +32,13 @@ const APItem = styled.article`
         width: 100%;
         background-color: black;
         opacity: 0.5;
+        cursor: pointer;
     }
     &:hover {
         ::before {
             transition: 0.2s ease;
             opacity: 0.0;
+            cursor: pointer;
         }
     }
 `
@@ -59,6 +62,7 @@ const APTitle = styled.h4`
     align-self: center;
     margin: 0;
     z-index: 3;
+    cursor: pointer;
     ${Media.phone`
         font-size: 16px;
         width: 70%;

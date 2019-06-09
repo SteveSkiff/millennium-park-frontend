@@ -47,7 +47,7 @@ const IndexContainer = styled.section`
   padding: 0;
   /* margin: 5%; */
   /* box-shadow: 0px 0px 0px 1px rgba(0,0,0, 0.1), 0px 0px 5px 0px rgba(0,0,0, 0.3); */
-  ${Media.tablet`
+  ${Media.phone`
     flex-direction: column;
     margin: 0;
   `}
@@ -207,16 +207,16 @@ const IndexPage = ({data}) => (
           <SectionTitle color={"#00ffdf"}><Icon src={phoneicon} />CONTACT US</SectionTitle>
 
           <SectionSubTextContainer>
-            <SubText><ExternalLink>312.742.1168</ExternalLink> <br />
-            <ExternalLink mailto='dcase@cityofchicago.org'>dcase@cityofchicago.org</ExternalLink></SubText>
+            <SubText><ExternalLink href="tel:3127421168">312.742.1168</ExternalLink> <br />
+            <ExternalLink href='mailto:dcase@cityofchicago.org'>dcase@cityofchicago.org</ExternalLink></SubText>
           </SectionSubTextContainer>
 
           <SectionSubTextContainer>
           <SectionLinks direction="row">
-            <SectionLinkItem><ExternalLink target="_blank" href="https://www.facebook.com"><Icon type='social'  src={fbicon}/></ExternalLink></SectionLinkItem>
-            <SectionLinkItem><Icon type='social' src={twicon}/></SectionLinkItem>
-            <SectionLinkItem><Icon type='social' src={igicon}/></SectionLinkItem>
-            <SectionLinkItem><Icon type='social'  src={yticon}/></SectionLinkItem>
+            <SectionLinkItem><ExternalLink target="_blank" href="https://www.facebook.com/MillenniumParkChicago/"><Icon type='social'  src={fbicon}/></ExternalLink></SectionLinkItem>
+            <SectionLinkItem><ExternalLink target="_blank" href="https://twitter.com/millennium_park"><Icon type='social' src={twicon}/></ExternalLink></SectionLinkItem>
+            <SectionLinkItem><ExternalLink target="_blank" href="https://www.instagram.com/millennium_park/"><Icon type='social' src={igicon}/></ExternalLink></SectionLinkItem>
+            <SectionLinkItem><ExternalLink target="_blank" href="https://www.youtube.com/user/ChicagoCultureEvents"><Icon type='social'  src={yticon}/></ExternalLink></SectionLinkItem>
           </SectionLinks>
         </SectionSubTextContainer>
       </SectionContainer>

@@ -24,7 +24,7 @@ const MainContainer = styled.main`
     opacity: 0.1;
     top: 0;
     left: 0;
-    bottom: 0;
+    bottom: 0; 
     right: 0;
   }
 `
@@ -36,6 +36,13 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
+          }
+        }
+        fileName: file(relativePath: {eq: "chicago_skyline.png"}) {
+          childImageSharp {
+            fluid(maxWidth: 2000, maxHeight:1000) {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
         allPrismicArticle {
@@ -74,7 +81,7 @@ const Layout = ({ children }) => (
     render={data => (
       <>
       
-        <Header siteTitle={data.site.siteMetadata.title} navArticleData={data.allPrismicArticle.edges} navContentListData={data.allPrismicContentList.edges} />
+        <Header navImage={data.fileName.childImageSharp.fluid} siteTitle={data.site.siteMetadata.title} navArticleData={data.allPrismicArticle.edges} navContentListData={data.allPrismicContentList.edges} />
 
         <MainContainer>{children}</MainContainer>
 

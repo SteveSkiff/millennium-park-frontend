@@ -1,49 +1,92 @@
 import { Link } from "gatsby"
+import Img from 'gatsby-image'
 import PropTypes from "prop-types"
 import React from "react"
 import styled from 'styled-components'
 import Media from '../components/Breakpoints'
 import mplogowhite from '../images/mplogo600(White).png'
 
-import SlideDown from './Animations'
+import {
+  slideDown,
+  fadeIn,
+  fadeOut,
+  fadeInNav,
+  fadeOutNav
+} from './Animations'
 
-const NavContainer = styled.ul`
+const NavContainer = styled.nav`
   justify-self: flex-end;
   align-self: left;
-  display: ${props => props.state};
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  transition: 0.2s ease;
-  height: 340px;
+  transition: 0.4s ease;
+  height: ${props => props.state === 'visible' ? "340px" : " 340px"};
   margin-bottom: 0;
+  position: relative;
   ${Media.phone`
     margin: 0;
     justify-self: flex-end;
     align-self: left;
-    display: ${props => props.state};
+    display: flex;
+    visibility: {props => props.state};
     flex-direction: column;
     flex-wrap: wrap;
-    transition: 0.2s ease;
-    height: 100vh;
+    transition: 0.4s ease;
+    height: ${props => props.state === 'visible' ? "100vh" : "100vh"};
     z-index: -10;
+  `}
+`
+
+const NavImage = styled(Img)`
+  bottom: -28%;
+  position: absolute !important;
+  left: 0;
+  z-index: 2;
+  height: ${props => props.state === 'visible' ? "100%" : "0%"};
+  width: 100%;
+  padding: 0;
+  opacity: ${props => props.state === 'visible' ? "0.2" : "0"};
+  /* animation: ${props => props.state === 'visible' ? fadeInNav : fadeOutNav} 0.5s ease-out; */
+  transition: height 1s 0.3s ease-out;
+  filter: blur(5px);
+  & picture > img {
+    /* height: 100%; */
+    /* object-position: 10% 10% !important; */
+    ${Media.phone`
+      /* object-position: center center !important; */
+      filter: blur(2px);
+    `}
+  }
+  ${Media.phone`
+    opacity: 0.2;
+    min-width: 200px;
+    bottom: 0%;
+    left: 0;
+    height: ${props => props.state === 'visible' ? "70%" : "0%"};
+    transition: height 1s 0.3s ease-out;
   `}
 `
 
 const HeaderContainer = styled.header`
   background: ${props => props.background};
+  transition: 0.4s ease;
   position: absolute;
   z-index: 1000;
   margin: 0;
   padding: 0;
   width: 100%;
+  height: auto; /* was auto */
+  height: ${props => props.state === 'visible' ? "433px" : "0px"};
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  
   ${Media.phone`
     margin: 0;
     background: ${props => props.background};
     position: ${props => props.position};
+    height: ${props => props.state === 'visible' ? "100vh" : "0vh"};
+    transition: 0.4s ease;
     z-index: 1000;
     margin: 0;
     padding: 0;
@@ -58,9 +101,21 @@ const LogoAndDropdownContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+  height: 94px;
   justify-content: space-between;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  height: 100px;
   ${Media.phone`
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    height: 100px;
   `}
 `
 
@@ -78,7 +133,7 @@ const DropdownBtn = styled.div`
   `}
 `
 
-const NavImg = styled.img`
+const NavLogoImg = styled.img`
   width: 120px;
   padding: 10px;
   margin: 0 10px;
@@ -92,12 +147,20 @@ const MenuList = styled.ul`
   list-style-type: none;
   display: flex;
   margin: 10px 0px 10px 0px;
+  /* visibility: ${props => props.state === 'visible' ? "visible" : "hidden"}; */
+  max-height: ${props => props.state === 'visible' ? "500px" : "0px"};
   opacity: 1;
+  overflow: hidden;
+  animation: ${props => props.state === 'visible' ? fadeIn : fadeOut} 0.4s ease-in;
+  transition: max-height 0.2s ease-in;
+  padding-top: 100px;
   ${Media.phone`
     list-style-type: none;
     display: flex;
     margin: 10px 0px 10px 0px;
     opacity: 1;
+    padding-top: 100px;
+    max-height: ${props => props.state === 'visible' ? "100vh" : "0vh"};
   `}
 `
 
@@ -109,7 +172,6 @@ const DropdownMenu = styled.div`
   z-index: 3;
   ${Media.phone`
     display: block;
-    position: fixed;
     transition: 0.2s ease;
     height: 85vh;
     margin-left: 5%;
@@ -224,19 +286,19 @@ class Header extends React.Component {
 
   }
 
-
+ 
   render() {
     return (
-      <HeaderContainer position={this.state.showMenu === true ? "fixed" : "absolute"} background={this.state.showMenu === true ? "linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, 1), rgba(48, 91, 160, 1))" : "none"}>
+      <HeaderContainer state={this.state.showMenu === true ? "visible" : "hidden"} position={this.state.showMenu === true ? "fixed" : "absolute"} background="linear-gradient(to right, rgba(30, 80, 149, 1), rgba(48, 91, 160, 1), rgba(48, 91, 160, 1))">
         <LogoAndDropdownContainer>
-          <Link to="/"><NavImg src={mplogowhite} /></Link>
+          <Link to="/"><NavLogoImg src={mplogowhite} /></Link>
           <DropdownBtn onClick={this.showMenu}>{this.state.showMenu ? "\u25b2" : "\u25bc"}</DropdownBtn>
         </LogoAndDropdownContainer>
       
-          <NavContainer state={this.state.showMenu === true ? "flex" : "none"}>
-          {this.state.showMenu ? 
-                  ( <DropdownMenu ref={(element) => {this.dropdownMenu = element}}>
-                      <MenuList>
+          <NavContainer state={this.state.showMenu === true ? "visible" : "hidden"}>
+          <NavImage state={this.state.showMenu === true ? "visible" : "hidden"} fluid={this.props.navImage} />
+          <DropdownMenu state={this.state.showMenu === true ? "visible" : "hidden"} ref={(element) => {this.dropdownMenu = element}}>
+                      <MenuList state={this.state.showMenu === true ? "visible" : "hidden"}>
                           <MenuItem>
                             <MenuSubList>
                               <MenuSubTitle><Underline color={'#47bfa4'}>PLAN</Underline></MenuSubTitle>
@@ -292,10 +354,7 @@ class Header extends React.Component {
                             
                           </MenuItem>
                       </MenuList>
-                  </DropdownMenu> )
-                  :
-                  (null)
-          }
+                  </DropdownMenu> 
         </NavContainer>
       </HeaderContainer>
     )

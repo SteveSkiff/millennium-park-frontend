@@ -4,6 +4,7 @@ import Media from './Breakpoints'
 
 const SectionContainer = styled.section`
     margin: 0px 5%;
+  
     ${Media.phone`
         margin: 40px 0;
         &:last-child {
@@ -14,6 +15,7 @@ const SectionContainer = styled.section`
 
 const Section = styled.article`
     margin: 40px 0px;
+    display: flex;
     ${Media.phone`
         margin: 40px 0px;
         &:last-child {
@@ -31,6 +33,7 @@ const SectionTitle = styled.h2`
 `
 
 const SectionText = styled.div`
+    width: 100%;
     font-size: 16px;
     padding: 2%;
     margin: 0;
@@ -52,6 +55,9 @@ const SectionText = styled.div`
             & a {
             color: blue;
             font-weight: 400;
+            &:hover {
+                color: darkblue;
+            }
         }
 
         }
@@ -64,6 +70,9 @@ const SectionText = styled.div`
         & a {
             color: blue;
             font-weight: 400;
+            &:hover {
+                color: darkblue;
+            }
         }
     }
     ${Media.phone`
@@ -78,9 +87,26 @@ const SectionText = styled.div`
     `}
 `
 
+const SectionTextContainer = styled.div`
+    margin: 0;
+`
+
+const SectionImage = styled.img`
+    height: 200px;
+    width: 200px;
+    padding: 0%;
+    margin: auto 0;
+    margin-right: 20px;
+    border-radius: 5px;
+    background-size: cover;
+    background-image: ${props => props.src};
+`
+
 export {
     SectionContainer,
     Section,
     SectionTitle,
     SectionText,
+    SectionTextContainer,
+    SectionImage
 }

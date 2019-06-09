@@ -42,7 +42,7 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
 
     return (
         <Layout>
-            <SEO  title="Article" keywords={[`millenium park`, `chicago`, `tourism`]} />
+            <SEO  title={data.content_list_title.text} keywords={[`millenium park`, `chicago`, `tourism`]} />
 
             <PageHeroContainer>
                 <PageHeroImage src={data.content_list_hero_image.url} />
@@ -65,7 +65,7 @@ const ContentListTemplate = ({data: {prismicContentList}}) => {
                                 <ContentListItemTitle>{item.content_list_item_title.text}</ContentListItemTitle>
                                 <ContentListItemText>{item.content_list_item_text1.text}</ContentListItemText>
                                 {item.content_list_item_link ? 
-                                    <ContentListItemLink target="_blank" href={item.content_list_item_link.url}>{item.content_list_item_link.url}</ContentListItemLink> 
+                                    <ContentListItemLink target="_blank" href={item.content_list_item_link.url}>{item.content_list_item_link_name.text}</ContentListItemLink> 
                                     : 
                                     (null)
                                 }
@@ -124,6 +124,9 @@ export const ContentListQuery = graphql`
                     }
                     content_list_item_link {
                         url
+                    }
+                    content_list_item_link_name {
+                        text
                     }
                 }
                 content_list_article_footer {

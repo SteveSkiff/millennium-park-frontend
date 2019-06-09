@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Millennium Park`,
-    description: `Visit Chicago's Millenium Park and experience one of the recreational lifebloods of downtown.`,
+    description: `Visit Chicago's Millenium Park and experience one of the recreational sanctuaries of downtown.`,
     author: `Chicago Park District`,
   },
   plugins: [
